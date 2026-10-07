@@ -23,30 +23,25 @@
       { name: "Indigo", color: "#6555aa" },
       { name: "Teal", color: "#248a87" },
     ];
-    let stateIndex = 0;
-    let updates_enabled = true;
+    let index = 0;
     const label = document.querySelector("#label");
     const swatch = document.querySelector("#swatch");
 
     function update() {
-      if (updates_enabled) {
-        let item = State[0];
-        for (let i = 0; i < State.length; i++) {
-          if (i === stateIndex) item = State[i];
-        }
-        label.textContent = item.name;
-        swatch.style.backgroundColor = item.color;
-      } else {
-        console.log("ignored update while updates are disabled");
+      let item = State[0];
+      for (let i = 0; i < State.length; i++) {
+        if (i === index) item = State[i];
       }
+      label.textContent = item.name;
+      swatch.style.backgroundColor = item.color;
     }
 
     document.querySelector("#next").addEventListener("click", () => {
-      stateIndex = (stateIndex + 1) % State.length;
+      index = (index + 1) % State.length;
       update();
     });
     document.querySelector("#previous").addEventListener("click", () => {
-      stateIndex = (stateIndex - 1 + State.length) % State.length;
+      index = (index - 1 + State.length) % State.length;
       update();
     });
     update();
